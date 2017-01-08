@@ -5,4 +5,5 @@ module.exports = {
   logger: require('./lib/logger'),
   utils: require('./lib/utils'),
   gcloud: require('./lib/gcloud'),
+  cache: require('./lib/cache'),
 };
