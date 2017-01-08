@@ -1,5 +1,5 @@
 {
-  "name": "refurbme-shared",
+  "name": "@refurbme/shared",
   "version": "1.0.0",
   "description": "RefurbMe shared utils",
   "main": "index.js",
