@@ -6,4 +6,5 @@ module.exports = {
   utils: require('./lib/utils'),
   gcloud: require('./lib/gcloud'),
   cache: require('./lib/cache'),
+  publisher: require('./lib/publisher'),
 };

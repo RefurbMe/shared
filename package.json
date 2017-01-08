@@ -19,10 +19,11 @@
   "dependencies": {
     "@google/cloud-debug": "^0.9.1",
     "@google/cloud-trace": "^0.5.10",
+    "amqplib": "^0.5.1",
+    "bluebird": "^3.4.6",
     "cache-manager": "2.3.0",
     "cache-manager-redis": "0.3.2",
-    "bluebird": "^3.4.6",
-    "winston": "^2.2.0",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "winston": "^2.2.0"
   }
 }
