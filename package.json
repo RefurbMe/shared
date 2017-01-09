@@ -1,6 +1,6 @@
 {
   "name": "@refurbme/shared",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "RefurbMe shared utils",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "cache-manager-redis": "0.3.2",
     "co": "^4.6.0",
     "compression": "^1.6.2",
-    "morgan": "^1.7.0",
+    "express-winston": "^2.1.2",
     "request": "^2.79.0",
     "winston": "^2.2.0"
   }
