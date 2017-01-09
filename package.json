@@ -18,6 +18,7 @@
   "homepage": "https://github.com/RefurbMe/shared",
   "dependencies": {
     "@google/cloud-debug": "^0.9.1",
+    "@google/cloud-errors": "^0.1.1",
     "@google/cloud-trace": "^0.5.10",
     "amqplib": "^0.5.1",
     "bluebird": "^3.4.6",
