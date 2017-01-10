@@ -33,7 +33,7 @@ return serviceLoader()
 ### Available functions chains:
 
 - *ping(hostList, options)*: Check if hostnames are alive
-  - `hostList` (array of hostnames to ping)
+  - `hostList` (array of host to ping) host format: `hostname:port`
   - `options.failureMax` (integer, how many attempts should we try before we exit the process, default: 5)
   - `options.frequency` (integer, how many milliseconds should wait before checking again hostnames, default: 30000)
 - *knex(knexObject, options)*: Check if database is alive, and destroy knex on exit
