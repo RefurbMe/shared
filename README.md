@@ -4,6 +4,9 @@ Set of modules designed for Microservice architecture.
 
 We recommend to fork this, instead of importing this module (it's subject to change anytime)
 
+
+
+
 ## @refurbme/shared/lib/service_loader
 
 Start all services (sequentially) with graceful exit handler.
@@ -25,19 +28,23 @@ return serviceLoader()
   /* Some logic here */
   return Promise.resolve(true);
 })
-.knex(knexObject)
+.db({
+  pgUrl: config.pgUrl,
+  pgDatabase: config.pgDatabase,
+})
 .express(expressApp, config.httpPort)
 .done();
 ```
 
 ### Available functions chains:
 
-- *ping(hostList, options)*: Check if hostnames are alive
+- *ping(hostList, [options])*: Check if hostnames are alive
   - `hostList` (array of host to ping) host format: `hostname:port`
   - `options.failureMax` (integer, how many attempts should we try before we exit the process, default: 5)
   - `options.frequency` (integer, how many milliseconds should wait before checking again hostnames, default: 30000)
-- *knex(knexObject, options)*: Check if database is alive, and destroy knex on exit
-  - `knexObject` (object: http://knexjs.org/#Installation-node)
+- *db([options])*: Initiate database, checks if database is alive and destroy knex on exit
+  - `options.pgUrl` (string, postgres url, default: set in `./lib/db/config.js`)
+  - `options.pgDatabase` (string, database to query, default: postgres)
   - `options.failureMax` (integer, how many attempts should we try before we exit the process, default: 5)
   - `options.frequency` (integer, how many milliseconds should wait before checking again the database, default: 30000)
 - *cache(redisUrl)*: Start cache for `@refurbme/shared/lib/cache`
@@ -53,7 +60,9 @@ return serviceLoader()
   - `port` (integer, HTTP port)
 - *then(customPromise)*: Run a custom process on the process
   - `customPromise` (function that returns a Promise)
-- *done()*: Add this at the end of the chain to start the service.
+- *done([callback])*: Add this at the end of the chain to start the service. it can take a callback function as parameter that executes when everything is loaded.
+
+
 
 
 ## @refurbme/shared/lib/gcloud
@@ -94,6 +103,8 @@ gcloud.init({
 - *GCLOUD_PROJECT*: gcloud project name
 
 
+
+
 ## @refurbme/shared/lib/logger
 
 Log data on the console (using winston), and report errors to gcloud/error if enabled
@@ -120,9 +131,9 @@ app.use(logger.errorLogger);
 ```
 
 ### Exported methods:
-- requestLogger
-- errorLogger
-- gcloudErrorsMiddleWare
+- requestLogger: Express middleware to log requests
+- errorLogger: Express middleware to log errors
+- gcloudErrorsMiddleWare: Express middleware to report express errors to gcloud
 - error
 - warn
 - info
@@ -130,3 +141,52 @@ app.use(logger.errorLogger);
 - verbose
 - debug
 - silly
+
+
+
+
+## @refurbme/shared/lib/db
+
+Connect to a Postgres database using [knex](http://knexjs.org/).
+
+Check section `@refurbme/shared/lib/service_loader` for details to initiate the database
+
+### Full Example:
+
+```js
+const serviceLoader = require('@refurbme/shared/lib/service_loader');
+const dbLoader = require('@refurbme/shared/lib/db');
+
+serviceLoader()
+.db({
+  pgUrl: 'postgres://root:@localhost',
+  pgDatabase: 'postgres',
+})
+.done(() => {
+  db.raw('SELECT 1;')
+  .then((data) => {
+    const db = dbLoader.getKnexObject();
+    console.log(data);
+  });
+});
+
+```
+
+### Available methods:
+
+- *init(pgUrl, pgDatabase)*: Initiate database
+- *getKnexObject()*: get knex object
+
+### Available tasks
+
+- Create database: `DB_NAME=demo node ./lib/db/tasks/createdb.js`
+- Drop database: `DB_NAME=demo node ./lib/db/tasks/dropdb.js`
+- Migrate: `DB_NAME=demo node ./lib/db/tasks/migrate.js`
+
+### Used environment variables
+
+- POSTGRES_PORT_5432_TCP_ADDR: Postgres hostname
+- POSTGRES_PORT_5432_TCP_PORT: Postgres port
+- POSTGRES_ENV_POSTGRES_USER: Postgres username
+- POSTGRES_ENV_POSTGRES_PASSWORD: Postgres password
+- DB_NAME: Postgres database
