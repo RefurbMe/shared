@@ -1,31 +1,21 @@
 {
- "extends": "airbnb/base",
-
- "env": {
-   "browser": true,
-   "node": true,
-   "mocha": true
- },
-
- "rules": {
-   "strict": 0,
-   "func-names": 0,
-   "no-param-reassign": 0,
-   "no-loop-func": 0,
-   "arrow-body-style": 0,
-   "new-cap": 0,
-   "no-use-before-define": [1, "nofunc"],
-   "no-underscore-dangle": 0,
-   "prefer-rest-params": 0,
-   "no-alert": 0,
-   "prefer-spread": 0,
-   "arrow-parens": 0
- },
- "globals": {
-    "swig": true,
-    "Formatter": true,
-    "noUiSlider": true,
-    "ouibounce": true,
-    "srcRequire": true
+  "extends": "airbnb/base",
+  "env": {
+    "node": true,
+  },
+  "rules": {
+    "strict": 0,
+    "func-names": 0,
+    "no-param-reassign": 0,
+    "no-loop-func": 0,
+    "arrow-body-style": 0,
+    "new-cap": 0,
+    "no-use-before-define": [1, "nofunc"],
+    "object-shorthand": 0,
+    "prefer-rest-params" : 0,
+    "newline-per-chained-call": 0,
+    "comma-dangle": 0,
+    "prefer-spread": 0,
+    "import/no-extraneous-dependencies": 0,
   }
 }

@@ -32,7 +32,7 @@ return serviceLoader()
   pgUrl: config.pgUrl,
   pgDatabase: config.pgDatabase,
 })
-.express(expressApp, config.httpPort)
+.express(() => require('./express_app.js'), config.httpPort)
 .done();
 ```
 
@@ -54,9 +54,9 @@ return serviceLoader()
   - `publisherExchanges` (array, list of exchanges to assert)
 - *coworkers(amqUrl, coworkersApp)*: Connect to RabbitMQ using coworkers, and close it when exit
   - `amqUrl` (string, amq url)
-  - `coworkersApp` (object, https://github.com/tjmehta/coworkers)
+  - `coworkersApp` (function that returns coworkers app, https://github.com/tjmehta/coworkers)
 - *express(expressApp, port)*: Start express HTTP server, and close it when exit
-  - `expressApp` (object, https://github.com/expressjs/express)
+  - `expressApp` (function that returns express app, https://github.com/expressjs/express) - We advice you to use the require inside this function.
   - `port` (integer, HTTP port)
 - *then(customPromise)*: Run a custom process on the process
   - `customPromise` (function that returns a Promise)
