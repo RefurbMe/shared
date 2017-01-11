@@ -89,6 +89,16 @@ gcloud.init({
 });
 ```
 
+### Available methods:
+
+- *init(options)*: Initiate gcloud (see options below)
+- *reportError()*: Report an error to gcloud-errors, error must be an Error object
+- *expressMiddleWare()*: gcloud-errors express middleware
+- *startSpan()*: gcloud-trace startSpan (see [trace](https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/) documentation)
+- *endSpan()*: gcloud-trace endSpan (see [trace](https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/) documentation)
+- *runInSpan()*: gcloud-trace runInSpan (see [trace](https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/) documentation)
+- *runInRootSpan()*: gcloud-trace runInRootSpan (see [trace](https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/) documentation)
+
 ### Available options:
 
 - *rootDir*: string (required), root directory of the project
