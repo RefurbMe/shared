@@ -61,6 +61,8 @@ return serviceLoader()
 - *then(customPromise)*: Run a custom process on the process
   - `customPromise` (function that returns a Promise)
 - *done([callback])*: Add this at the end of the chain to start the service. it can take a callback function as parameter that executes when everything is loaded.
+- *onExit(customPromise)*: Action to perform when closing Gracefully
+  - `customPromise` (function that returns a Promise)
 
 
 
