@@ -57,7 +57,7 @@ return serviceLoader()
   - `options.consumer` (required function that returns coworkers app, https://github.com/tjmehta/coworkers)
   - `options.consumerExchange` (required string, exchange name where the consumer queue is binded)
   - `options.consumerQueue` (required string, consumer queue name)
-  - `options.publisherExchange` (optional string, publisher exchange name)
+  - `options.publisherExchanges` (optional array, list of publisher exchange name)
 - *express(expressApp, port)*: Start express HTTP server, and close it when exit
   - `expressApp` (required function that returns express app, https://github.com/expressjs/express) - We advice you to use the require inside this function.
   - `port` (integer, HTTP port. default: `80`)
