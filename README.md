@@ -79,24 +79,25 @@ Monitoring using Google Stackdriver: Debug, Trace, Errors.
 ```js
 const gcloud = require('@refurbme/shared/lib/gcloud');
 
-gcloud.init({
-  rootDir: process.cwd(),
+// Environment variable:
+// - ENABLE_GCLOUD_TRACE: "1"
+// - ENABLE_GCLOUD_ERROR: "1"
+// - ENABLE_GCLOUD_DEBUG: "1"
+// - GCLOUD_PROJECT: "my-project"
+// - GCLOUD_STACKDRIVER_CREDENTIALS: "xxxx"
+
+gcloud.init(process.cwd(), {
   trace: {
-    enabled: true,
     ignoreUrls: [/^\/assets/, /\/~*health/],
-  },
-  debug: {
-    enabled: true,
-  },
-  error: {
-    enabled: true,
-  },
+  }
 });
 ```
 
 ### Available methods:
 
-- *init(options)*: Initiate gcloud (see options below)
+- *init(projectRootDirectory, [options])*: Initiate gcloud
+  - options: (optional object) more details below
+  - projectRootDirectory: (required, string) Project root directory (where package.json is located)
 - *reportError()*: Report an error to gcloud-errors, error must be an Error object
 - *expressMiddleWare()*: gcloud-errors express middleware
 - *startSpan()*: gcloud-trace startSpan (see [trace](https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/) documentation)
@@ -106,16 +107,18 @@ gcloud.init({
 
 ### Available options:
 
-- *rootDir*: string (required), root directory of the project
-- *credentials*: object (optional), gcloud credentials (default: base64decode(GCLOUD_STACKDRIVER_CREDENTIALS))
-- *trace*: object, options to override: https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/
-- *debug*: object, options to override: https://github.com/GoogleCloudPlatform/cloud-debug-nodejs/
-- *error*: object, options to override: https://github.com/GoogleCloudPlatform/cloud-errors-nodejs/
+- *credentials*: object, gcloud credentials (default: base64decode(GCLOUD_STACKDRIVER_CREDENTIALS))
+- *trace*: object, options to override default configuration: https://github.com/GoogleCloudPlatform/cloud-trace-nodejs/
+- *debug*: object, options to override default configuration: https://github.com/GoogleCloudPlatform/cloud-debug-nodejs/
+- *error*: object, options to override default configuration: https://github.com/GoogleCloudPlatform/cloud-errors-nodejs/
 
-### Required environment variables:
+### Environment variables:
 
-- *GCLOUD_STACKDRIVER_CREDENTIALS*: string, base64 of the gcloud json key
-- *GCLOUD_PROJECT*: gcloud project name
+- *GCLOUD_STACKDRIVER_CREDENTIALS*: required string, base64 of the gcloud json key
+- *GCLOUD_PROJECT*: required string: gcloud project name
+- *ENABLE_GCLOUD_TRACE*: option binary: Enable gcloud trace
+- *ENABLE_GCLOUD_ERROR*: option binary: Enable gcloud error reporting
+- *ENABLE_GCLOUD_DEBUG*: option binary: Enable gcloud debug
 
 
 
