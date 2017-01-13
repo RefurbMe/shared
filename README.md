@@ -48,16 +48,19 @@ return serviceLoader()
   - `options.failureMax` (integer, how many attempts should we try before we exit the process, default: 5)
   - `options.frequency` (integer, how many milliseconds should wait before checking again the database, default: 30000)
 - *cache(redisUrl)*: Start cache for `@refurbme/shared/lib/cache`
-  - `redisUrl` (string, redis url)
+  - `redisUrl` (required string, redis url)
 - *publisher(amqUrl, publisherExchanges)*: Connect to RabbitMQ and assert exchanges for `@refurbme/shared/lib/publisher`, and close it when exit
-  - `amqUrl` (string, amq url)
-  - `publisherExchanges` (array, list of exchanges to assert)
-- *coworkers(amqUrl, coworkersApp)*: Connect to RabbitMQ using coworkers, and close it when exit
-  - `amqUrl` (string, amq url)
-  - `coworkersApp` (function that returns coworkers app, https://github.com/tjmehta/coworkers)
+  - `amqUrl` (required string, amq url)
+  - `publisherExchanges` (required array, list of exchanges to assert)
+- *coworkers(options)*: Connect to RabbitMQ using coworkers, and close it when exit. `options` is required.
+  - `options.amqUrl` (required string, amq url)
+  - `options.consumer` (required function that returns coworkers app, https://github.com/tjmehta/coworkers)
+  - `options.consumerExchange` (required string, exchange name where the consumer queue is binded)
+  - `options.consumerQueue` (required string, consumer queue name)
+  - `options.publisherExchange` (optional string, publisher exchange name)
 - *express(expressApp, port)*: Start express HTTP server, and close it when exit
-  - `expressApp` (function that returns express app, https://github.com/expressjs/express) - We advice you to use the require inside this function.
-  - `port` (integer, HTTP port)
+  - `expressApp` (required function that returns express app, https://github.com/expressjs/express) - We advice you to use the require inside this function.
+  - `port` (integer, HTTP port. default: `80`)
 - *then(customPromise)*: Run a custom process on the process
   - `customPromise` (function that returns a Promise)
 - *done([callback])*: Add this at the end of the chain to start the service. it can take a callback function as parameter that executes when everything is loaded.
