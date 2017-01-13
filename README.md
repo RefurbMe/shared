@@ -119,7 +119,9 @@ gcloud.init(process.cwd(), {
 - *ENABLE_GCLOUD_TRACE*: option binary: Enable gcloud trace
 - *ENABLE_GCLOUD_ERROR*: option binary: Enable gcloud error reporting
 - *ENABLE_GCLOUD_DEBUG*: option binary: Enable gcloud debug
-
+- *GCLOUD_DEBUG_LOGLEVEL*: Log level for gcloud/debug (default: 1)
+- *GCLOUD_TRACE_LOGLEVEL*: Log level for gcloud/trace (default: 1)
+- *GCLOUD_ERRORS_LOGLEVEL*: Log level for gcloud/error (default: 1)
 
 
 
