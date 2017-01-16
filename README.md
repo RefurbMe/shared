@@ -192,17 +192,6 @@ serviceLoader()
 
 ```
 
-### Available methods:
-
-- *init(pgUrl, pgDatabase)*: Initiate database
-- *getKnexObject()*: get knex object
-
-### Available tasks
-
-- Create database: `DB_NAME=demo node ./lib/db/tasks/createdb.js`
-- Drop database: `DB_NAME=demo node ./lib/db/tasks/dropdb.js`
-- Migrate: `DB_NAME=demo node ./lib/db/tasks/migrate.js`
-
 ### Used environment variables
 
 - POSTGRES_PORT_5432_TCP_ADDR: Postgres hostname
@@ -210,3 +199,13 @@ serviceLoader()
 - POSTGRES_ENV_POSTGRES_USER: Postgres username
 - POSTGRES_ENV_POSTGRES_PASSWORD: Postgres password
 - DB_NAME: Postgres database
+
+## @refurbme/shared/lib/db/tasks
+
+- *run(action, database)*: Run a task to the database
+  - action: can be `createdb`, `dropdb`, `migrate`, `seed`, `init` (createdb + migrate + seed), `refresh` (dropdb + init)
+  - database: database name
+- *createdb(database)*: Create database
+- *dropdb(database)*: Drop database
+- *migrate(database)*: Migrate database
+- *seed(database)*: Seed database
