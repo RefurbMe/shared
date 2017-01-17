@@ -1,6 +1,6 @@
 {
   "name": "@refurbme/shared",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Set of modules designed for Microservice architecture",
   "main": "index.js",
   "scripts": {
